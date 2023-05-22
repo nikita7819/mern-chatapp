@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config({ path: __dirname + "/.env" });
-}
-
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
@@ -49,20 +45,20 @@ app.use(errorHandler);
 
 // static files (build of youxr frontend)
 
-if (process.env.NODE_ENV === "production") {
-  const path = require("path");
-  app.use(express.static(path.resolve(__dirname, "client", "build")));
-  app.get("*", (req, res) => {
-    res.sendFile(
-      path.resolve(__dirname, "client", "build", "index.html"),
-      function (err) {
-        if (err) {
-          res.status(500).send(err);
-        }
-      }
-    );
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+//   const path = require("path");
+//   app.use(express.static(path.resolve(__dirname, "client", "build")));
+//   app.get("*", (req, res) => {
+//     res.sendFile(
+//       path.resolve(__dirname, "client", "build", "index.html"),
+//       function (err) {
+//         if (err) {
+//           res.status(500).send(err);
+//         }
+//       }
+//     );
+//   });
+// }
 
 const server = app.listen(
   PORT,
@@ -72,7 +68,7 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "https://chit-chat-app-seven.vercel.app",
+    origin: "http://localhost:3000",
   },
 });
 
