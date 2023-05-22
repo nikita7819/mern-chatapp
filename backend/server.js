@@ -1,6 +1,5 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const path = require("path");
 const cors = require("cors");
 const colors = require("colors");
 const connectDB = require("./config/db");
@@ -68,7 +67,7 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://chat-client-mzlo.onrender.com",
   },
 });
 
