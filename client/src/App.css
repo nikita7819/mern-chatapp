@@ -1,0 +1,17 @@
+* {
+  font-family: "Mali", cursive;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  margin-left: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 120, 0.281);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
