@@ -80,11 +80,11 @@ const Login = () => {
 
   return (
     <Stack spacing={4}>
-      <FormControl id="email" isRequired colorScheme="green">
+      <FormControl id="lemail" isRequired colorScheme="green">
         <FormLabel>Email address</FormLabel>
         <Input type="email" onChange={(e) => setEmail(e.target.value)} />
       </FormControl>
-      <FormControl id="password" isRequired>
+      <FormControl id="lpassword" isRequired>
         <FormLabel>Password</FormLabel>
         <InputGroup>
           <Input
