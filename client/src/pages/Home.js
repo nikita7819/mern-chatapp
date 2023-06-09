@@ -16,12 +16,17 @@ import Signup from "../components/auth/Signup";
 
 const Home = () => {
   return (
-    <Container maxW="2xl" centerContent>
+    <Container
+      maxW="xl"
+      centerContent
+      maxh={"calc(110vh)"}
+      justifyContent="center"
+    >
       <Box
-        bg={useColorModeValue("whatsapp.50", "gray.800")}
+        // bg={useColorModeValue("whatsapp.50", "gray.800")}
         d="flex"
         rounded="2xl"
-        justifyContent="center"
+        alignItems={"center"}
         p={3}
         w="50%"
         m="20px 0 15px 0"
@@ -36,6 +41,8 @@ const Home = () => {
         boxShadow={"xl"}
         w="100%"
         p={8}
+        border={"2px"}
+        borderColor={"blackAlpha.50"}
       >
         <Tabs isFitted variant="soft-rounded" colorScheme="green">
           <TabList mb="1em">

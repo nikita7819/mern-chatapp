@@ -25,8 +25,14 @@ import animationData from "../../animation/typing.json";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
-  const { selectedChat, setSelectedChat, user, notification, setNotification } =
-    ChatState();
+  const {
+    selectedChat,
+    setSelectedChat,
+    user,
+    notification,
+    setNotification,
+    setIsRightbarOpen,
+  } = ChatState();
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const [newMessage, setNewMessage] = useState("");
@@ -168,7 +174,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     selectedChatCompare = selectedChat;
   }, [selectedChat]);
 
-  console.log(notification);
+  // console.log(notification);
 
   return (
     <>
@@ -203,9 +209,15 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     <>{selectedChat.chatName.toUpperCase()}</>
                   )}
                 </Text>
-                {/* <Text color="gray.400" fontSize={{ base: "xs", md: "sm" }}>
-                  online
-                </Text> */}
+                <Text
+                  color="blue.400"
+                  cursor={"pointer"}
+                  display={{ base: "block", lg: "none" }}
+                  onClick={() => setIsRightbarOpen(true)}
+                  fontSize={{ base: "xs", md: "sm" }}
+                >
+                  Info
+                </Text>
               </Flex>
               <IconButton
                 display={{ base: "flex" }}
@@ -300,7 +312,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           </Box>
         </>
       ) : (
-        <Box mt={190} ml={120}>
+        <Box mt={190} ml={120} display={{ base: "none", lg: "flex" }}>
           <Text fontSize="4xl" color="blackAlpha.300" cursor="default">
             Select a chat to start messaging
           </Text>

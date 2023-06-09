@@ -11,7 +11,14 @@ import React from "react";
 
 const ChatUser = ({ user, handleChat, handleRemove, isAdmin, currUserId }) => {
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" mr={5}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      mr={5}
+      ml={2}
+      position={"relative"}
+    >
       <Avatar src={user.profile} />
 
       <Badge

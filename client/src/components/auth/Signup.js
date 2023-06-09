@@ -52,7 +52,7 @@ const Signup = () => {
       });
       return;
     }
-    console.log(name, email, password, profile);
+    // console.log(name, email, password, profile);
     try {
       const config = {
         headers: {
@@ -69,7 +69,7 @@ const Signup = () => {
         },
         config
       );
-      console.log(data);
+      // console.log(data);
       toast({
         title: "Registration Successful",
         status: "success",
@@ -120,7 +120,15 @@ const Signup = () => {
           setPicLoading(false);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
+          toast({
+            title: "Select an Image of type jpg or png only!",
+            status: "warning",
+            duration: 5000,
+            isClosable: true,
+            position: "bottom",
+          });
+
           setPicLoading(false);
         });
     } else {
@@ -138,8 +146,12 @@ const Signup = () => {
 
   return (
     <Stack spacing={4}>
-      <HStack>
-        <FormControl id=" name" isRequired>
+      <HStack flexDirection={{ base: "column", md: "row" }}>
+        <FormControl
+          id=" name"
+          isRequired
+          marginBottom={{ base: "1rem", md: "0" }}
+        >
           <FormLabel> Name</FormLabel>
           <Input type="text" onChange={(e) => setName(e.target.value)} />
         </FormControl>
@@ -149,8 +161,12 @@ const Signup = () => {
           <Input type="email" onChange={(e) => setEmail(e.target.value)} />
         </FormControl>
       </HStack>
-      <HStack>
-        <FormControl id="password" isRequired>
+      <HStack flexDirection={{ base: "column", md: "row" }}>
+        <FormControl
+          id="password"
+          marginBottom={{ base: "1rem", md: "0" }}
+          isRequired
+        >
           <FormLabel>Password</FormLabel>
           <InputGroup>
             <Input

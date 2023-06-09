@@ -131,7 +131,7 @@ const Chatpanel = ({ fetchAgain }) => {
         bg="#f1f1f1"
         w="100%"
         h="100vh"
-        display={{ base: !selectedChat ? "block" : "none", sm: "block" }}
+        display={{ base: !selectedChat ? "block" : "none", lg: "block" }}
       >
         <Stack px="3" py="2">
           <Box
@@ -153,7 +153,13 @@ const Chatpanel = ({ fetchAgain }) => {
               setSearch={setSearch}
               searchResult={searchResult}
             >
-              <Icon as={BiMessageSquareAdd} w="6" h="6" color="green.600" />
+              <Icon
+                as={BiMessageSquareAdd}
+                cursor={"pointer"}
+                w="6"
+                h="6"
+                color="green.600"
+              />
             </GroupChatModal>
           </Box>
           <Button

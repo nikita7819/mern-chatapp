@@ -9,7 +9,10 @@ import {
   Text,
   useToast,
   Spinner,
+  IconButton,
 } from "@chakra-ui/react";
+import { CloseIcon } from "@chakra-ui/icons";
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import authHeader from "../../config/auth-header";
@@ -25,6 +28,7 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
     selectedChat,
     groupAdmin,
     setGroupAdmin,
+    setIsRightbarOpen,
     chats,
     setChats,
   } = ChatState();
@@ -224,7 +228,9 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
           bg="green.300"
           height="100vh"
           color="white"
+          overflowY={"scroll"}
           boxShadow="xl"
+          width="100%"
           padding={5}
           alignItems="center"
         >
@@ -250,9 +256,20 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
           height="100vh"
           color="white"
           boxShadow="xl"
+          width={"100%"}
           padding={5}
+          overflowY={"scroll"}
           alignItems="center"
         >
+          <IconButton
+            display={{ base: "block", lg: "none" }}
+            alignSelf={"flex-start"}
+            marginBottom={"2rem"}
+            bg={"green.500"}
+            icon={<CloseIcon />}
+            size="xs"
+            onClick={() => setIsRightbarOpen(false)}
+          />
           <Avatar
             src={getSender(user, selectedChat.users).profile}
             size="lg"
@@ -273,9 +290,19 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
           color="white"
           boxShadow="xl"
           padding={5}
+          overflowY={"scroll"}
           alignItems="center"
         >
           <Box display="flex" alignItems="center" flexDirection="column">
+            <IconButton
+              display={{ base: "block", lg: "none" }}
+              alignSelf={"flex-start"}
+              marginBottom={"2rem"}
+              bg={"green.500"}
+              icon={<CloseIcon />}
+              size="xs"
+              onClick={() => setIsRightbarOpen(false)}
+            />
             <Avatar name={selectedChat.chatName} size="lg" boxShadow="md" />
             <Text mt={2} fontSize="xl" fontWeight={"semibold"}>
               {selectedChat.chatName}
@@ -338,8 +365,8 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
             ))}
           </Box>
           <Button
-            mt={6}
-            ml={12}
+            mt={{ base: "6", lg: "3" }}
+            ml={{ base: "0", lg: "12" }}
             bg={"red.400"}
             _hover={{ bg: "red.600" }}
             onClick={() => handleRemove(user)}

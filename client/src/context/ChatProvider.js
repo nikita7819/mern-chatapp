@@ -9,6 +9,7 @@ const ChatProvider = ({ children }) => {
   const [groupAdmin, setGroupAdmin] = useState();
   const [notification, setNotification] = useState([]);
   const [chats, setChats] = useState([]);
+  const [isRightbarOpen, setIsRightbarOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,6 +24,8 @@ const ChatProvider = ({ children }) => {
   return (
     <ChatContext.Provider
       value={{
+        isRightbarOpen,
+        setIsRightbarOpen,
         selectedChat,
         setSelectedChat,
         user,
