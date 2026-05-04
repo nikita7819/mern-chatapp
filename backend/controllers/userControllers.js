@@ -75,4 +75,27 @@ const allUsers = asyncHandler(async (req, res) => {
   res.send(users);
 });
 
-module.exports = { registerUser, authUser, allUsers };
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const updatedUser = await User.findByIdAndUpdate(
+    req.params.id,
+    { $set: { ...req.body } },
+    { new: true },
+  );
+  if (updatedUser) {
+    res.status(201).json({
+      message: "Profile updated successfully",
+      data: {
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        profile: updatedUser.profile,
+        token: generateToken(updatedUser._id),
+      },
+    });
+  } else {
+    res.status(400);
+    throw new Error("Failed to update the user profile");
+  }
+});
+
+module.exports = { registerUser, authUser, allUsers, updateUserProfile };

@@ -1,5 +1,4 @@
-import { Avatar, Box, Flex, Text, useToast } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Avatar, Box, Text } from "@chakra-ui/react";
 import { ChatState } from "../../context/ChatProvider";
 import { getSender } from "../../config/chatLogic";
 
@@ -13,6 +12,7 @@ const MyChats = ({ chat }) => {
       bg={selectedChat === chat ? "green.500" : "#E8E8E8"}
       color={selectedChat === chat ? "white" : "black"}
       px={3}
+      my={1}
       py={2}
       borderRadius="lg"
       key={chat._id}

@@ -61,13 +61,13 @@ app.use(errorHandler);
 
 const server = app.listen(
   PORT,
-  console.log(`server is up at port ${PORT}`.rainbow.bold)
+  console.log(`server is up at port ${PORT}`.rainbow.bold),
 );
 
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "https://chat-client-mzlo.onrender.com",
+    // origin: "https://chat-client-mzlo.onrender.com",
   },
 });
 

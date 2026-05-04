@@ -14,7 +14,7 @@ import {
 import { CloseIcon } from "@chakra-ui/icons";
 
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import authHeader from "../../config/auth-header";
 import { getSender } from "../../config/chatLogic";
 import { ChatState } from "../../context/ChatProvider";
@@ -62,7 +62,7 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
           chatId: selectedChat._id,
           userId: user1._id,
         },
-        { headers: authHeader() }
+        { headers: authHeader() },
       );
 
       user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
@@ -94,7 +94,7 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
       return;
     }
 
-    if (selectedChat.users.find((u) => u._id === user1._id)) {
+    if (selectedChat?.users.find((u) => u._id === user1._id)) {
       toast({
         title: "User already added!",
         status: "error",
@@ -112,7 +112,7 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
           chatId: selectedChat._id,
           userId: user1._id,
         },
-        { headers: authHeader() }
+        { headers: authHeader() },
       );
       setSelectedChat(data);
       setFetchAgain(!fetchAgain);
@@ -143,7 +143,7 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
         },
         {
           headers: authHeader(),
-        }
+        },
       );
       setSelectedChat(data);
       setFetchAgain(!fetchAgain);
@@ -201,7 +201,7 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
         {
           headers: authHeader(),
           "Content-type": "application/json",
-        }
+        },
       );
       if (!chats.find((c) => c._id === data._id)) {
         setChats([data, ...chats]);
@@ -221,12 +221,14 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
 
   return (
     <>
-      {!selectedChat ? (
+      {/* {!selectedChat
+        ? (
         <Box
           display="flex"
           flexDirection="column"
           bg="green.300"
-          height="100vh"
+          h="100%"
+          minH={0}
           color="white"
           overflowY={"scroll"}
           boxShadow="xl"
@@ -248,52 +250,21 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
             {user.email}
           </Text>
         </Box>
-      ) : !selectedChat.isGroupChat ? (
-        <Box
-          display="flex"
-          flexDirection="column"
-          bg="green.300"
-          height="100vh"
-          color="white"
-          boxShadow="xl"
-          width={"100%"}
-          padding={5}
-          overflowY={"scroll"}
-          alignItems="center"
-        >
-          <IconButton
-            display={{ base: "block", lg: "none" }}
-            alignSelf={"flex-start"}
-            marginBottom={"2rem"}
-            bg={"green.500"}
-            icon={<CloseIcon />}
-            size="xs"
-            onClick={() => setIsRightbarOpen(false)}
-          />
-          <Avatar
-            src={getSender(user, selectedChat.users).profile}
-            size="lg"
-            boxShadow="md"
-          />
-          <Divider variant="solid" mt={5} />
-          <Text mt={5} mb={2} fontSize="xl" fontWeight={"semibold"}>
-            {getSender(user, selectedChat.users).name}
-          </Text>
-          <Text fontSize="sm" fontWeight={"medium"}>
-            {getSender(user, selectedChat.users).email}
-          </Text>
-        </Box>
-      ) : (
-        <Box
-          bg="green.300"
-          height="100vh"
-          color="white"
-          boxShadow="xl"
-          padding={5}
-          overflowY={"scroll"}
-          alignItems="center"
-        >
-          <Box display="flex" alignItems="center" flexDirection="column">
+      ) : */}
+      {selectedChat &&
+        (!selectedChat?.isGroupChat ? (
+          <Box
+            display="flex"
+            flexDirection="column"
+            bg="green.300"
+            // height="100vh"
+            color="white"
+            boxShadow="xl"
+            width={"100%"}
+            padding={5}
+            overflowY={"scroll"}
+            alignItems="center"
+          >
             <IconButton
               display={{ base: "block", lg: "none" }}
               alignSelf={"flex-start"}
@@ -303,78 +274,111 @@ const Rightbar = ({ fetchAgain, setFetchAgain }) => {
               size="xs"
               onClick={() => setIsRightbarOpen(false)}
             />
-            <Avatar name={selectedChat.chatName} size="lg" boxShadow="md" />
-            <Text mt={2} fontSize="xl" fontWeight={"semibold"}>
-              {selectedChat.chatName}
+            <Avatar
+              src={getSender(user, selectedChat?.users)?.profile}
+              size="lg"
+              boxShadow="md"
+            />
+            <Divider variant="solid" mt={5} />
+            <Text mt={5} mb={2} fontSize="xl" fontWeight={"semibold"}>
+              {getSender(user, selectedChat?.users)?.name}
+            </Text>
+            <Text fontSize="sm" fontWeight={"medium"}>
+              {getSender(user, selectedChat?.users)?.email}
             </Text>
           </Box>
-
-          <Divider variant="solid" mt={2} />
-          <FormControl
-            display="flex"
-            alignItems={"center"}
-            justifyContent="space-between"
-            my={4}
+        ) : (
+          <Box
+            bg="green.300"
+            // height="100vh"
+            color="white"
+            boxShadow="xl"
+            padding={5}
+            overflowY={"scroll"}
+            alignItems="center"
           >
-            <Input
-              w="80%"
-              variant="filled"
-              placeholder="Rename chat"
-              value={groupChatName}
-              onChange={(e) => setGroupChatName(e.target.value)}
-            />
-            <Button w="20px" isLoading={renameLoading}>
-              <CheckIcon color="green" onClick={handleRename} />
-            </Button>
-          </FormControl>
-          <FormControl mb={3}>
-            <Input
-              variant="flushed"
-              placeholder="Add user"
-              onChange={(e) => handleSearch(e.target.value)}
-            />
-          </FormControl>
-          {loading ? (
-            <Spinner size="lg" />
-          ) : (
-            <Box overflowY="scroll" height="20vh">
-              {searchResult.map((u) => (
-                <UserListItem
-                  key={u._id}
+            <Box display="flex" alignItems="center" flexDirection="column">
+              <IconButton
+                display={{ base: "block", lg: "none" }}
+                alignSelf={"flex-start"}
+                marginBottom={"2rem"}
+                bg={"green.500"}
+                icon={<CloseIcon />}
+                size="xs"
+                onClick={() => setIsRightbarOpen(false)}
+              />
+              <Avatar name={selectedChat?.chatName} size="lg" boxShadow="md" />
+              <Text mt={2} fontSize="xl" fontWeight={"semibold"}>
+                {selectedChat?.chatName}
+              </Text>
+            </Box>
+
+            <Divider variant="solid" mt={2} />
+            <FormControl
+              display="flex"
+              alignItems={"center"}
+              justifyContent="space-between"
+              my={4}
+            >
+              <Input
+                w="80%"
+                variant="filled"
+                placeholder="Rename chat"
+                value={groupChatName}
+                onChange={(e) => setGroupChatName(e.target.value)}
+              />
+              <Button w="20px" isLoading={renameLoading}>
+                <CheckIcon color="green" onClick={handleRename} />
+              </Button>
+            </FormControl>
+            <FormControl mb={3}>
+              <Input
+                variant="flushed"
+                placeholder="Add user"
+                onChange={(e) => handleSearch(e.target.value)}
+              />
+            </FormControl>
+            {loading ? (
+              <Spinner size="lg" />
+            ) : (
+              <Box overflowY="scroll" height="20vh">
+                {searchResult.map((u) => (
+                  <UserListItem
+                    key={u._id}
+                    user={u}
+                    handleFunction={() => handleAddUser(u)}
+                  />
+                ))}
+              </Box>
+            )}
+            <Text mt={3} fontSize="md">
+              Members:
+            </Text>
+            <Box display="flex" flexWrap="wrap" overflowY="scroll" mt={2}>
+              {selectedChat?.users.map((u) => (
+                <ChatUser
                   user={u}
-                  handleFunction={() => handleAddUser(u)}
+                  currUserId={user._id}
+                  key={u._id}
+                  isAdmin={
+                    selectedChat?.groupAdmin?._id === u._id ? "true" : "false"
+                  }
+                  handleChat={() => accessChat(u)}
+                  handleRemove={() => handleRemove(u)}
                 />
               ))}
             </Box>
-          )}
-          <Text mt={3} fontSize="md">
-            Members:
-          </Text>
-          <Box display="flex" flexWrap="wrap" overflowY="scroll" mt={2}>
-            {selectedChat.users.map((u) => (
-              <ChatUser
-                user={u}
-                currUserId={user._id}
-                key={u._id}
-                isAdmin={
-                  selectedChat.groupAdmin._id === u._id ? "true" : "false"
-                }
-                handleChat={() => accessChat(u)}
-                handleRemove={() => handleRemove(u)}
-              />
-            ))}
+            <Button
+              mt={{ base: "6", lg: "3" }}
+              ml={{ base: "0", lg: "12" }}
+              bg={"red.400"}
+              _hover={{ bg: "red.600" }}
+              onClick={() => handleRemove(user)}
+            >
+              Leave group
+            </Button>
           </Box>
-          <Button
-            mt={{ base: "6", lg: "3" }}
-            ml={{ base: "0", lg: "12" }}
-            bg={"red.400"}
-            _hover={{ bg: "red.600" }}
-            onClick={() => handleRemove(user)}
-          >
-            Leave group
-          </Button>
-        </Box>
-      )}
+        ))}
     </>
   );
 };

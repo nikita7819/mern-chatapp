@@ -3,7 +3,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Chats from "./pages/Chats";
 import Home from "./pages/Home";
-import { useEffect } from "react";
 import { ChatState } from "./context/ChatProvider";
 
 function App() {

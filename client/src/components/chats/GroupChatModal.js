@@ -24,14 +24,14 @@ const GroupChatModal = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [groupChatName, setGroupChatName] = useState();
   const [selectedUsers, setSelectedUsers] = useState([]);
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const toast = useToast();
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-  const { user, chats, setChats } = ChatState();
+  const { chats, setChats } = ChatState();
 
   const handleSubmit = async () => {
     if (!groupChatName || !selectedUsers) {
@@ -61,7 +61,7 @@ const GroupChatModal = ({ children }) => {
           name: groupChatName,
           users: JSON.stringify(selectedUsers.map((u) => u._id)),
         },
-        { headers: authHeader() }
+        { headers: authHeader() },
       );
       setChats([data, ...chats]);
       onClose();

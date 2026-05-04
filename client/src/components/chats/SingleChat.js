@@ -95,7 +95,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         `${BASE_URL}/api/message/${selectedChat._id}`,
         {
           headers: authHeader(),
-        }
+        },
       );
       // console.log(data);
       setMessages(data);
@@ -127,7 +127,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           {
             headers: authHeader(),
             "Content-type": "application/json",
-          }
+          },
         );
         // console.log(data);
         setNewMessage("");
@@ -184,8 +184,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             display="flex"
             width="100%"
             flexDirection="column"
-            height="100vh"
+            height="100%"
+            minHeight={0}
             bg="#e8e8e8"
+            flex={1}
           >
             <Box
               display="flex"
@@ -228,12 +230,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             </Box>
             <Box
               display="flex"
-              flexDir="column"
-              justifyContent="flex-end"
+              flexDirection="column"
+              flex={1}
+              minHeight={0}
               p={2}
               w={"100%"}
-              // bg="red"
-              h="100%"
               overflowY="hidden"
             >
               {loading ? (
@@ -249,7 +250,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    overflowY: "scroll",
+                    flex: 1,
+                    minHeight: 0,
+                    overflowY: "auto",
                     scrollbarWidth: "none",
                   }}
                 >
