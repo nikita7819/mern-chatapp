@@ -4,17 +4,36 @@ A modern, full-stack real-time chat application built with the MERN stack (Mongo
 
 ## 📸 Screenshots
 
-### Authentication Pages
+### Sign Up Page
 
-- **Sign Up Page**: Create a new account with name, email, password, and profile picture
-- **Login Page**: Secure login with email and password authentication
+Create a new account with name, email, password, and profile picture upload.
 
-### Main Chat Interface
+![Sign Up Page](screenshots/signup.png)
 
-- **Chat Dashboard**: Browse and manage conversations
-- **Messages**: Real-time messaging with other users
-- **User Search**: Search and connect with other users
-- **Profile Management**: Update profile information and picture
+### Login Page
+
+Secure login with email and password authentication.
+
+![Login Page](screenshots/login.png)
+
+### Chat Dashboard
+
+Browse and manage all your conversations in one place.
+
+![Chat Dashboard](screenshots/dashboard.png)
+
+### Messages & User Search
+
+Real-time messaging with other users and search functionality.
+
+![Messages Interface](screenshots/messages.png)
+![User Search Interface](screenshots/user-search.png)
+
+### Profile Management
+
+Update your profile information and picture.
+
+![Profile Modal](screenshots/profile.png)
 
 ## ✨ Features
 
