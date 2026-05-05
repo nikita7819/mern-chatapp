@@ -316,7 +316,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         </>
       ) : (
         <Box mt={190} ml={120} display={{ base: "none", lg: "flex" }}>
-          <Text fontSize="4xl" color="blackAlpha.300" cursor="default">
+          <Text
+            fontSize="4xl"
+            color="blackAlpha.300"
+            cursor="default"
+            userSelect="none"
+          >
             Select a chat to start messaging
           </Text>
         </Box>

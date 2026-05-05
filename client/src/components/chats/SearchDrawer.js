@@ -83,7 +83,7 @@ const SearchDrawer = ({ children }) => {
       }
       setSelectedChat(data);
       setLoadingChats(false);
-      // onClose();
+      onClose();
     } catch (error) {
       toast({
         title: "Error occured to fetch chat",

@@ -107,7 +107,24 @@ const Chatpanel = ({ fetchAgain }) => {
         </Box>
         <Box px="3" py="2" flex={1} minH={0} overflowY="auto">
           {chats ? (
-            chats.map((chat) => <MyChats key={chat._id} chat={chat} />)
+            chats.length > 0 ? (
+              chats.map((chat) => <MyChats key={chat._id} chat={chat} />)
+            ) : (
+              <Stack alignItems="center" mt="10">
+                <Text
+                  fontSize="xl"
+                  fontWeight="medium"
+                  color="gray.500"
+                  userSelect={"none"}
+                  textAlign={"center"}
+                  w={"0.7"}
+                >
+                  No chats found.
+                  <br />
+                  Find a friend to start a new chat!
+                </Text>
+              </Stack>
+            )
           ) : (
             <ChatLoading />
           )}
