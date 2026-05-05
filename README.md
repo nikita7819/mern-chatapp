@@ -44,7 +44,6 @@ Update your profile information and picture.
 - **User Profiles**: Upload profile pictures and manage user information
 - **Chat History**: View message history with other users
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
-- **User Presence**: See online status of other users
 
 ## 🛠️ Tech Stack
 
@@ -194,18 +193,16 @@ The client will run on `http://localhost:3000`
 
 ### User Routes
 
-- `POST /api/user/signup` - Register a new user
+- `POST /api/user/` - Register a new user
 - `POST /api/user/login` - Login user
-- `GET /api/user` - Get all users
-- `POST /api/user/search` - Search users
+- `GET /api/user?search=` - Search users
 
 ### Chat Routes
 
 - `GET /api/chat` - Get all chats for user
 - `POST /api/chat` - Create a new chat
-- `PUT /api/chat/:id` - Update chat
-- `DELETE /api/chat/:id` - Delete chat
-
+- `POST /api/chat/group` - Create a group chat
+  
 ### Message Routes
 
 - `GET /api/message/:chatId` - Get all messages in a chat
